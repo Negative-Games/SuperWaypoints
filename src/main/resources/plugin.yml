@@ -1,0 +1,3 @@
+name: TemplatePlugin
+version: '1.0.0-SNAPSHOT'
+main: games.negative.template.TemplatePlugin
