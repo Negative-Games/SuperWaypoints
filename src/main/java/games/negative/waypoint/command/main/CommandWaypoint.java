@@ -35,6 +35,6 @@ public class CommandWaypoint extends Command {
             return;
         }
 
-        new WaypointMenu(profile, manager, handler).open(player);
+        new WaypointMenu(profile, manager, handler, 1).open(player);
     }
 }

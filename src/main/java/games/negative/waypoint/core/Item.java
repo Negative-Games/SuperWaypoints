@@ -17,6 +17,10 @@ public enum Item {
 
     BLACK_FILLER(ItemBuilder.newItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName(" ").build()),
 
+    NEXT_PAGE(ItemBuilder.newItemBuilder(Material.ARROW).setName("&aNext Page").build()),
+    PREVIOUS_PAGE(ItemBuilder.newItemBuilder(Material.ARROW).setName("&cPrevious Page").build()),
+
+    ADD_WAYPOINT(ItemBuilder.newItemBuilder(Material.ANVIL).setName("&aAdd Waypoint").build()),
     ;
 
     private final ItemStack item;
@@ -126,5 +130,9 @@ public enum Item {
         meta.setLore(lore);
 
         item.setItemMeta(meta);
+    }
+
+    public ItemStack getItem() {
+        return item;
     }
 }
