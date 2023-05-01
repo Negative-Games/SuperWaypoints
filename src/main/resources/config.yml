@@ -1,0 +1,22 @@
+#todo: this is a rough draft of the configuration file, it will be updated in the future
+
+# Display types: HOLOGRAM, ACTION_BAR, BOSSBAR
+display-type: "HOLOGRAM"
+display-update-interval: 10 # In Minecraft Ticks
+# (changing the display parameters will require a server restart to take effect)
+
+# superwaypoints.group.<group>
+groups:
+  default: 1 # Can set a maximum of 1 waypoint
+  vip: 3 # Can set a maximum of 3 waypoints
+  staff: -1 # Can set an unlimited number of waypoints
+
+disabled-worlds:
+  - "example1"
+  - "example2"
+  - "example3"
+
+world-names:
+  world: "&2&lOverworld"
+  world_nether: "&4&lNether"
+  world_the_end: "&5&lThe End"
