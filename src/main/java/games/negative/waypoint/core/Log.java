@@ -15,7 +15,7 @@ public enum Log {
     ;
 
     private static boolean muteInfo = true;
-    public static void init(JavaPlugin plugin) {
+    public static void init(SuperWaypoints plugin) {
         muteInfo = plugin.getConfig().getBoolean("mute-info-logs", true);
     }
 

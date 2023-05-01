@@ -1,6 +1,7 @@
 package games.negative.waypoint;
 
 import games.negative.framework.BasePlugin;
+import games.negative.waypoint.core.Item;
 import games.negative.waypoint.core.Locale;
 import games.negative.waypoint.core.Log;
 
@@ -14,6 +15,7 @@ public class SuperWaypoints extends BasePlugin {
 
         Log.init(this);
         Locale.init(this);
+        Item.init(this);
     }
 
     public static SuperWaypoints getInstance() {

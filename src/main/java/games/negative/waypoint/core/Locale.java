@@ -2,6 +2,7 @@ package games.negative.waypoint.core;
 
 import com.google.common.collect.Lists;
 import games.negative.framework.message.Message;
+import games.negative.waypoint.SuperWaypoints;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.command.CommandSender;
@@ -32,7 +33,7 @@ public enum Locale {
     }
 
     @SneakyThrows
-    public static void init(JavaPlugin plugin) {
+    public static void init(SuperWaypoints plugin) {
         File configFile = new File(plugin.getDataFolder(), "messages.yml");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(configFile);
         if (!configFile.exists()) {
