@@ -23,6 +23,34 @@ public enum Item {
     PREVIOUS_PAGE(ItemBuilder.newItemBuilder(Material.ARROW).setName("&cPrevious Page").build()),
 
     ADD_WAYPOINT(ItemBuilder.newItemBuilder(Material.ANVIL).setName("&aAdd Waypoint").build()),
+
+    SET_NAME(ItemBuilder.newItemBuilder(Material.NAME_TAG).setName("&aSet Name").setLore(
+            "&7Current Name: &f%name%"
+    ).build()),
+
+    SET_LOCATION(ItemBuilder.newItemBuilder(Material.IRON_BARS).setName("&aSet Location").setLore(
+            "&7Current Location: &f%location%"
+    ).build()),
+
+    SET_ICON(ItemBuilder.newItemBuilder(Material.OAK_SIGN).setName("&aSet Icon").setLore(
+            "&7Current Icon: &f%icon%"
+    ).build()),
+
+    GREEN_CONFIRM(ItemBuilder.newItemBuilder(Material.LIME_STAINED_GLASS_PANE).setName("&a&lCONFIRM").build()),
+
+    WORLDS(ItemBuilder.newItemBuilder(Material.GRASS_BLOCK).setName("&aWorlds").build()),
+
+    X_COORDINATE(ItemBuilder.newItemBuilder(Material.COMPASS).setName("&aX Coordinate").setLore(
+            "&7Current X Coordinate: &f%x%"
+    ).build()),
+
+    Y_COORDINATE(ItemBuilder.newItemBuilder(Material.COMPASS).setName("&aY Coordinate").setLore(
+            "&7Current Y Coordinate: &f%y%"
+    ).build()),
+
+    Z_COORDINATE(ItemBuilder.newItemBuilder(Material.COMPASS).setName("&aZ Coordinate").setLore(
+            "&7Current Z Coordinate: &f%z%"
+    ).build()),
     ;
 
     private final ItemStack item;

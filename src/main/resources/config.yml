@@ -21,6 +21,11 @@ world-names:
   world_nether: "&4&lNether"
   world_the_end: "&5&lThe End"
 
+world-icons:
+  world: GRASS_BLOCK
+  world_nether: NETHERRACK
+  world_the_end: END_STONE
+
 # If true the plugin will not send the console
 # "info" logs, meaning only errors and warnings will
 # be sent to the console.
