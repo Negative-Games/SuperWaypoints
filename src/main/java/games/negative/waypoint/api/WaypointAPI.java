@@ -11,4 +11,6 @@ public abstract class WaypointAPI {
     private static WaypointAPI instance;
 
     public abstract WaypointManager getWaypointManager();
+
+    public abstract WaypointHandler getWaypointHandler();
 }
