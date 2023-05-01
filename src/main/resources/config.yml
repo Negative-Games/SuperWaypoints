@@ -1,6 +1,6 @@
 #todo: this is a rough draft of the configuration file, it will be updated in the future
 
-# Display types: HOLOGRAM, ACTION_BAR, BOSSBAR
+# Display types: HOLOGRAM, ACTIONBAR, BOSSBAR
 display-type: "HOLOGRAM"
 display-update-interval: 10 # In Minecraft Ticks
 # (changing the display parameters will require a server restart to take effect)
@@ -20,3 +20,8 @@ world-names:
   world: "&2&lOverworld"
   world_nether: "&4&lNether"
   world_the_end: "&5&lThe End"
+
+# If true the plugin will not send the console
+# "info" logs, meaning only errors and warnings will
+# be sent to the console.
+mute-info-logs: true
