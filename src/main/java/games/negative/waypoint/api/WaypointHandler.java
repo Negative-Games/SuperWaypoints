@@ -2,7 +2,7 @@ package games.negative.waypoint.api;
 
 import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.api.model.display.WaypointDisplayHandler;
-import games.negative.waypoint.api.model.display.WaypointDisplayType;
+import games.negative.waypoint.api.model.key.SharedKey;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,25 +33,24 @@ public interface WaypointHandler {
     }
 
     /**
-     * Add a handler for a specific type
-     * @param type The type of handler
+     * Add a new display handler
      * @param handler The handler
      */
-    void addHandler(@NotNull WaypointDisplayType type, @NotNull WaypointDisplayHandler handler);
+    void addHandler(@NotNull WaypointDisplayHandler handler);
 
     /**
-     * Remove a handler for a specific type
+     * Remove a display handler
      * @param type The type of handler
      */
-    void removeHandler(@NotNull WaypointDisplayType type);
+    void removeHandler(@NotNull WaypointDisplayHandler type);
 
     /**
      * Get a handler for a specific type
-     * @param type The type of handler
+     * @param key The key of the handler
      * @return The handler
      */
     @Nullable
-    WaypointDisplayHandler getHandler(@NotNull WaypointDisplayType type);
+    WaypointDisplayHandler getHandler(@NotNull SharedKey key);
 
     /**
      * Get the main handler used on the server currently.

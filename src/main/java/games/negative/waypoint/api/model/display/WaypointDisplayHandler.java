@@ -1,6 +1,8 @@
 package games.negative.waypoint.api.model.display;
 
+import games.negative.framework.key.Keyd;
 import games.negative.waypoint.api.model.Waypoint;
+import games.negative.waypoint.api.model.key.SharedKey;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +11,13 @@ import org.jetbrains.annotations.NotNull;
  * This is used so the plugin can have multiple ways of displaying
  * waypoints to players.
  */
-public abstract class WaypointDisplayHandler {
+public abstract class WaypointDisplayHandler implements Keyd<SharedKey> {
+
+    private final SharedKey key;
+
+    public WaypointDisplayHandler(SharedKey key) {
+        this.key = key;
+    }
 
     /**
      * Invoked when a player activates a waypoint
@@ -24,4 +32,9 @@ public abstract class WaypointDisplayHandler {
      * @param waypoint The waypoint that was deactivated
      */
     public abstract void deactivate(@NotNull Player player, @NotNull Waypoint waypoint);
+
+    @Override
+    public @NotNull SharedKey getKey() {
+        return key;
+    }
 }
