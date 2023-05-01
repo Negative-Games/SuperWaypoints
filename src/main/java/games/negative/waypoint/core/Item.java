@@ -1,7 +1,9 @@
 package games.negative.waypoint.core;
 
 import games.negative.framework.base.itembuilder.ItemBuilder;
+import games.negative.framework.util.Utils;
 import games.negative.waypoint.SuperWaypoints;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -84,9 +86,15 @@ public enum Item {
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
 
-        config.set("display-name", meta.getDisplayName());
+        String displayName = meta.getDisplayName().replace("§", "&");
+
+        config.set("display-name", displayName);
         config.set("material", type.name());
-        config.set("lore", meta.getLore());
+
+        List<String> lore = meta.getLore();
+        if (lore != null) lore.replaceAll(s -> s.replace("§", "&"));
+
+        config.set("lore", lore);
 
         try {
             config.save(file);
@@ -126,8 +134,8 @@ public enum Item {
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
 
-        meta.setDisplayName(displayName);
-        meta.setLore(lore);
+        meta.setDisplayName(displayName == null ? null : Utils.color(displayName));
+        meta.setLore(Utils.color(lore));
 
         item.setItemMeta(meta);
     }
