@@ -27,7 +27,7 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
 
     // Framework / Backend
-    implementation 'games.negative.framework:minecraft-framework:3.2.4'
+    implementation 'games.negative.framework:minecraft-framework:3.2.5'
 }
 
 def targetJavaVersion = 11
