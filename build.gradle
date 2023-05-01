@@ -3,8 +3,8 @@ plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
-def id = "TemplatePlugin"
-def group = 'games.negative.template'
+def id = "SuperWaypoints"
+def group = 'games.negative.waypoints'
 def version = '1.0.0-SNAPSHOT'
 repositories {
     mavenCentral()
@@ -30,7 +30,7 @@ dependencies {
     implementation 'games.negative.framework:minecraft-framework:3.2.5'
 }
 
-def targetJavaVersion = 11
+def targetJavaVersion = 17
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
