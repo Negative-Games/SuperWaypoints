@@ -3,10 +3,12 @@ package games.negative.waypoint.ui.creator;
 import com.google.common.collect.Lists;
 import games.negative.framework.gui.AnvilGUI;
 import games.negative.framework.gui.GUI;
+import games.negative.framework.util.Utils;
 import games.negative.waypoint.SuperWaypoints;
 import games.negative.waypoint.api.WaypointManager;
 import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.core.Item;
+import games.negative.waypoint.core.util.UtilLore;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -29,7 +31,11 @@ public class WaypointCreatorLocationMenu extends GUI {
         ItemStack worlds = Item.WORLDS.getItem();
         setItemClickEvent(10, player -> worlds, (player, event) -> new WaypointCreatorWorldMenu(manager, builder, 1).open(player));
 
-        ItemStack x = Item.X_COORDINATE.getItem();
+        ItemStack x = Item.X_COORDINATE.getItem().clone();
+        double builderX = builder.getX();
+
+        UtilLore.replaceLore(x, "%x%", Utils.decimalFormat(builderX));
+
         setItemClickEvent(12, player -> x, (player, event) -> {
             new AnvilGUI.Builder()
                     .title("Waypoint Creator - Location")
@@ -45,7 +51,11 @@ public class WaypointCreatorLocationMenu extends GUI {
                     }).open(player);
         });
 
-        ItemStack y = Item.Y_COORDINATE.getItem();
+        ItemStack y = Item.Y_COORDINATE.getItem().clone();
+        double builderY = builder.getY();
+
+        UtilLore.replaceLore(y, "%y%", Utils.decimalFormat(builderY));
+
         setItemClickEvent(14, player -> y, (player, event) -> {
             new AnvilGUI.Builder()
                     .title("Waypoint Creator - Location")
@@ -61,7 +71,11 @@ public class WaypointCreatorLocationMenu extends GUI {
                     }).open(player);
         });
 
-        ItemStack z = Item.Z_COORDINATE.getItem();
+        ItemStack z = Item.Z_COORDINATE.getItem().clone();
+        double builderZ = builder.getZ();
+
+        UtilLore.replaceLore(z, "%z%", Utils.decimalFormat(builderZ));
+
         setItemClickEvent(16, player -> z, (player, event) -> {
             new AnvilGUI.Builder()
                     .title("Waypoint Creator - Location")

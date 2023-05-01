@@ -29,7 +29,10 @@ public enum Item {
     ).build()),
 
     SET_LOCATION(ItemBuilder.newItemBuilder(Material.IRON_BARS).setName("&aSet Location").setLore(
-            "&7Current Location: &f%location%"
+            "&7Current World: &f%world%",
+            "&7Current X: &f%x%",
+            "&7Current Y: &f%y%",
+            "&7Current Z: &f%z%"
     ).build()),
 
     SET_ICON(ItemBuilder.newItemBuilder(Material.OAK_SIGN).setName("&aSet Icon").setLore(

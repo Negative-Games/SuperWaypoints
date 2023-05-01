@@ -3,12 +3,14 @@ package games.negative.waypoint.ui.creator;
 import com.google.common.collect.Lists;
 import games.negative.framework.gui.AnvilGUI;
 import games.negative.framework.gui.GUI;
+import games.negative.framework.util.Utils;
 import games.negative.waypoint.SuperWaypoints;
 import games.negative.waypoint.api.WaypointManager;
 import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.core.Item;
 import games.negative.waypoint.core.util.UtilLore;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -45,11 +47,23 @@ public class WaypointCreatorMenu extends GUI {
         });
 
         ItemStack setLocation = Item.SET_LOCATION.getItem().clone();
+        String builderWorld = builder.getWorld();
+        double builderX = builder.getX();
+        double builderY = builder.getY();
+        double builderZ = builder.getZ();
 
+        UtilLore.replaceLore(setLocation, "%world%", (builderWorld == null ? "Not Set" : builderWorld));
+        UtilLore.replaceLore(setLocation, "%x%", Utils.decimalFormat(builderX));
+        UtilLore.replaceLore(setLocation, "%y%", Utils.decimalFormat(builderY));
+        UtilLore.replaceLore(setLocation, "%z%", Utils.decimalFormat(builderZ));
 
         setItemClickEvent(13, player -> setLocation, (player, event) -> new WaypointCreatorLocationMenu(manager, builder).open(player));
 
-        ItemStack setIcon = Item.SET_ICON.getItem();
+        ItemStack setIcon = Item.SET_ICON.getItem().clone();
+        Material icon = builder.getIcon();
+
+        UtilLore.replaceLore(setIcon, "%icon%", (icon == null ? "Not Set" : icon.name()));
+
         setItemClickEvent(16, player -> setIcon, (player, event) -> new WaypointCreatorIconMenu(manager, builder, 1).open(player));
 
         ItemStack confirm = Item.GREEN_CONFIRM.getItem();
