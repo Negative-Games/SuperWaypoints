@@ -1,5 +1,6 @@
 package games.negative.waypoint.api;
 
+import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.api.model.WaypointProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,11 +25,24 @@ public interface WaypointManager {
      */
     void handleQuit(@NotNull UUID uuid);
 
+    void addActiveWaypoint(@NotNull UUID uuid, @NotNull Waypoint waypoint);
+
+    void removeActiveWaypoint(@NotNull UUID uuid);
+
+    @Nullable
+    Waypoint getActiveWaypoint(@NotNull UUID uuid);
+
     /**
      * Get all loaded Profiles
      * @return A map of all loaded profiles
      */
     Map<UUID, WaypointProfile> getProfiles();
+
+    /**
+     * Get all active waypoints
+     * @return A map of all active waypoints
+     */
+    Map<UUID, Waypoint> getActiveWaypoints();
 
     /**
      * Get a profile by a player

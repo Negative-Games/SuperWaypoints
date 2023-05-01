@@ -5,10 +5,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import games.negative.waypoint.SuperWaypoints;
 import games.negative.waypoint.api.WaypointManager;
+import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.api.model.WaypointProfile;
 import games.negative.waypoint.core.Log;
 import games.negative.waypoint.core.structure.WaypointProfileImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.util.Map;
@@ -18,10 +20,12 @@ public class WaypointManagerProvider implements WaypointManager {
 
     private final SuperWaypoints plugin;
     private final Map<UUID, WaypointProfile> profiles;
+    private final Map<UUID, Waypoint> active;
 
     public WaypointManagerProvider(@NotNull SuperWaypoints plugin) {
         this.plugin = plugin;
         this.profiles = Maps.newHashMap();
+        this.active = Maps.newHashMap();
 
         // First time data loading logic
         File main = plugin.getDataFolder();
@@ -157,7 +161,28 @@ public class WaypointManagerProvider implements WaypointManager {
     }
 
     @Override
+    public void addActiveWaypoint(@NotNull UUID uuid, @NotNull Waypoint waypoint) {
+        this.active.remove(uuid);
+        this.active.put(uuid, waypoint);
+    }
+
+    @Override
+    public void removeActiveWaypoint(@NotNull UUID uuid) {
+        this.active.remove(uuid);
+    }
+
+    @Override
+    public @Nullable Waypoint getActiveWaypoint(@NotNull UUID uuid) {
+        return null;
+    }
+
+    @Override
     public Map<UUID, WaypointProfile> getProfiles() {
         return profiles;
+    }
+
+    @Override
+    public Map<UUID, Waypoint> getActiveWaypoints() {
+        return null;
     }
 }
