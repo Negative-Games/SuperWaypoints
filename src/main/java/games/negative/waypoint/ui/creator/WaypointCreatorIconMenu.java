@@ -24,15 +24,13 @@ public class WaypointCreatorIconMenu extends GUI {
         Material[] values = Material.values();
         int limit = (6 * 9) - values.length;
 
-        Arrays.stream(values).filter(material -> material.isItem() || material.isBlock()).skip((long) (page - 1) * limit).limit(limit).forEach(material -> {
-
+        Arrays.stream(values).filter(material -> !material.name().contains("AIR") && (material.isItem() || material.isBlock())).skip((long) (page - 1) * limit).limit(limit).forEach(material -> {
             ItemStack item = new ItemStack(material);
 
             addItemClickEvent(player -> item, (player, event) -> {
                 builder.icon(material);
                 new WaypointCreatorMenu(manager, builder).open(player);
             });
-
         });
 
     }
