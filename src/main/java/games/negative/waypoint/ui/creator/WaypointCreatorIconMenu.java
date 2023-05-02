@@ -22,10 +22,8 @@ public class WaypointCreatorIconMenu extends GUI {
         fillerSlots.forEach(index -> setItem(index, player -> filler));
 
         Material[] values = Material.values();
-        int limit = (6 * 9) - values.length;
+        int limit = Math.max((6 * 9) - values.length, 0);
 
-        /*
-        sending stacktrace in console, will fix later
         Arrays.stream(values).filter(material -> !material.name().contains("AIR") && (material.isItem() || material.isBlock())).skip((long) (page - 1) * limit).limit(limit).forEach(material -> {
             ItemStack item = new ItemStack(material);
 
@@ -34,8 +32,6 @@ public class WaypointCreatorIconMenu extends GUI {
                 new WaypointCreatorMenu(manager, builder).open(player);
             });
         });
-
-         */
 
     }
 }

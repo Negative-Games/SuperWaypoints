@@ -30,7 +30,7 @@ public class WaypointMenu extends GUI {
         setItemClickEvent(49, player -> addWaypoint, (player, event) -> new WaypointCreatorMenu(manager, new Waypoint.Builder()).open(player));
 
         List<Waypoint> waypoints = profile.getWaypoints();
-        int limit = (6 * 9) - fillerSlots.size();
+        int limit = Math.max((6 * 9) - waypoints.size(), 0);
         waypoints.stream().skip((long) (page - 1) * limit).limit(limit).forEach(waypoint -> {
             Material icon = waypoint.getIcon();
             String key = waypoint.getKey();
