@@ -27,7 +27,7 @@ public class WaypointCreatorWorldMenu extends GUI {
         fillerSlots.forEach(index -> setItem(index, player -> blackFillerItem));
 
         List<World> worlds = Bukkit.getWorlds();
-        int limit = Math.max((5 * 9) - worlds.size(), 0);
+        int limit = Math.max((5 * 9) - fillerSlots.size(), 0);
         worlds.stream().skip((long) (page - 1) * limit).limit(limit).forEach(world -> {
 
             ItemStack item = ItemBuilder.newItemBuilder(Material.GRASS_BLOCK).setName("&e" + world.getName()).build();
