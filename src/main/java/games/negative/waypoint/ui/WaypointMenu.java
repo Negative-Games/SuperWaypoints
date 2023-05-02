@@ -9,6 +9,7 @@ import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.api.model.WaypointProfile;
 import games.negative.waypoint.core.Item;
 import games.negative.waypoint.ui.creator.WaypointCreatorMenu;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,7 +28,13 @@ public class WaypointMenu extends GUI {
         fillerSlots.forEach(index -> setItem(index, player -> blackFillerItem));
 
         ItemStack addWaypoint = Item.ADD_WAYPOINT.getItem();
-        setItemClickEvent(49, player -> addWaypoint, (player, event) -> new WaypointCreatorMenu(manager, new Waypoint.Builder()).open(player));
+        setItemClickEvent(49, player -> addWaypoint, (player, event) -> {
+            Waypoint.Builder builder = new Waypoint.Builder();
+            Location location = player.getLocation();
+            builder.location(location);
+
+            new WaypointCreatorMenu(manager, builder).open(player);
+        });
 
         List<Waypoint> waypoints = profile.getWaypoints();
         int limit = Math.max((6 * 9) - fillerSlots.size(), 0);

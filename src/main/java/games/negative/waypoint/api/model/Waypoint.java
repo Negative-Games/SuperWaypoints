@@ -239,6 +239,17 @@ public interface Waypoint extends Keyd<String> {
             return new Location(world, x, y, z);
         }
 
+        public Builder location(@NotNull Location location) {
+            World world = location.getWorld();
+            if (world == null) return this;
+
+            this.world = world.getName();
+            this.x = location.getX();
+            this.y = location.getY();
+            this.z = location.getZ();
+            return this;
+        }
+
         /**
          * Build the waypoint.
          * @return The waypoint.
