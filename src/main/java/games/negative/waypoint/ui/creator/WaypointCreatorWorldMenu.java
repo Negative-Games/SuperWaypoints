@@ -50,7 +50,7 @@ public class WaypointCreatorWorldMenu extends GUI {
         }
 
         ItemStack returnItem = Item.RETURN.getItem();
-        setItemClickEvent(39, player -> returnItem, (player, event) -> new WaypointCreatorMenu(manager, builder).open(player));
+        setItemClickEvent(40, player -> returnItem, (player, event) -> new WaypointCreatorMenu(manager, builder).open(player));
 
     }
 }
