@@ -22,9 +22,9 @@ public class WaypointCreatorIconMenu extends GUI {
         fillerSlots.forEach(index -> setItem(index, player -> filler));
 
         Material[] values = Material.values();
-        int limit = Math.max((6 * 9) - values.length, 0);
+        int limit = Math.max((6 * 9) - fillerSlots.size(), 0);
 
-        Arrays.stream(values).filter(material -> !material.name().contains("AIR") && (material.isItem() || material.isBlock())).skip((long) (page - 1) * limit).limit(limit).forEach(material -> {
+        Arrays.stream(values).filter(material -> material.isBlock() || material.isItem()).skip((long) (page - 1) * limit).limit(limit).forEach(material -> {
             ItemStack item = new ItemStack(material);
 
             addItemClickEvent(player -> item, (player, event) -> {
@@ -32,6 +32,16 @@ public class WaypointCreatorIconMenu extends GUI {
                 new WaypointCreatorMenu(manager, builder).open(player);
             });
         });
+
+        if (page > 1) {
+            ItemStack previousPage = Item.PREVIOUS_PAGE.getItem();
+            addItemClickEvent(player -> previousPage, (player, event) -> new WaypointCreatorIconMenu(manager, builder, page - 1).open(player));
+        }
+
+        if (values.length > page * limit) {
+            ItemStack nextPage = Item.NEXT_PAGE.getItem();
+            addItemClickEvent(player -> nextPage, (player, event) -> new WaypointCreatorIconMenu(manager, builder, page + 1).open(player));
+        }
 
     }
 }
