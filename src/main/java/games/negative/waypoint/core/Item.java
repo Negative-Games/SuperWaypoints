@@ -54,6 +54,8 @@ public enum Item {
     Z_COORDINATE(ItemBuilder.newItemBuilder(Material.COMPASS).setName("&aZ Coordinate").setLore(
             "&7Current Z Coordinate: &f%z%"
     ).build()),
+
+    RETURN(ItemBuilder.newItemBuilder(Material.BOOK).setName("&c&lReturn").build()),
     ;
 
     private final ItemStack item;

@@ -48,5 +48,9 @@ public class WaypointCreatorWorldMenu extends GUI {
             ItemStack nextPage = Item.NEXT_PAGE.getItem();
             setItemClickEvent(44, player -> nextPage, (player, event) -> new WaypointCreatorWorldMenu(manager, builder, page + 1).open(player));
         }
+
+        ItemStack returnItem = Item.RETURN.getItem();
+        setItemClickEvent(39, player -> returnItem, (player, event) -> new WaypointCreatorMenu(manager, builder).open(player));
+
     }
 }
