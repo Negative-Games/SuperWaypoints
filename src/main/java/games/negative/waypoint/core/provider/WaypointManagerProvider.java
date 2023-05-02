@@ -173,7 +173,7 @@ public class WaypointManagerProvider implements WaypointManager {
 
     @Override
     public @Nullable Waypoint getActiveWaypoint(@NotNull UUID uuid) {
-        return null;
+        return active.getOrDefault(uuid, null);
     }
 
     @Override
@@ -183,6 +183,6 @@ public class WaypointManagerProvider implements WaypointManager {
 
     @Override
     public Map<UUID, Waypoint> getActiveWaypoints() {
-        return null;
+        return active;
     }
 }
