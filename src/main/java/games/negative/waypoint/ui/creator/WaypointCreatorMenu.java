@@ -7,6 +7,7 @@ import games.negative.framework.util.Utils;
 import games.negative.waypoint.SuperWaypoints;
 import games.negative.waypoint.api.WaypointManager;
 import games.negative.waypoint.api.model.Waypoint;
+import games.negative.waypoint.api.model.WaypointProfile;
 import games.negative.waypoint.core.Item;
 import games.negative.waypoint.core.util.UtilLore;
 import org.bukkit.Location;
@@ -86,7 +87,17 @@ public class WaypointCreatorMenu extends GUI {
                 return;
             }
 
+            WaypointProfile profile = manager.getProfile(player.getUniqueId());
+            if (profile == null) {
+                player.sendMessage("Profile is null");
+                return;
+            }
+
+            Waypoint finalization = builder.build();
+            profile.addWaypoint(finalization);
+
             player.sendMessage("Confirm");
+            player.closeInventory();
         }));
     }
 
