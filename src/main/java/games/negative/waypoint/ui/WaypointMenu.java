@@ -10,6 +10,7 @@ import games.negative.waypoint.api.model.WaypointProfile;
 import games.negative.waypoint.api.model.builder.WaypointBuilder;
 import games.negative.waypoint.core.Item;
 import games.negative.waypoint.ui.creator.WaypointCreatorMenu;
+import games.negative.waypoint.ui.editor.WaypointEditorMenu;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -47,6 +48,12 @@ public class WaypointMenu extends GUI {
 
             ItemStack logo = ItemBuilder.newItemBuilder(icon).setName("&e" + key).build();
             addItemClickEvent(player -> logo, (player, event) -> {
+                if (event.isShiftClick()) {
+                    // Open Editor Menu
+                    new WaypointEditorMenu(manager, waypoint).open(player);
+                    return;
+                }
+
                 player.sendMessage("click waypoint");
             });
 

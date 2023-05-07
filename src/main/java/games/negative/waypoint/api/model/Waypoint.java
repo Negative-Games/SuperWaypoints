@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Data
 public class Waypoint implements Keyd<String> {
@@ -54,10 +55,10 @@ public class Waypoint implements Keyd<String> {
         this.z = location.getZ();
     }
 
-    @NotNull
+    @Nullable
     public Location getLocation() {
         World world = Bukkit.getWorld(this.world);
-        Preconditions.checkNotNull(world, "World cannot be null!");
+        if (world == null) return null;
 
         return new Location(world, x, y, z);
     }
