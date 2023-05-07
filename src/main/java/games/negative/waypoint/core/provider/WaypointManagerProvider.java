@@ -184,4 +184,11 @@ public class WaypointManagerProvider implements WaypointManager {
     public Map<UUID, Waypoint> getActiveWaypoints() {
         return active;
     }
+
+    @Override
+    public void onDisable() {
+        for (UUID uuid : getProfiles().keySet()) {
+            handleQuit(uuid);
+        }
+    }
 }

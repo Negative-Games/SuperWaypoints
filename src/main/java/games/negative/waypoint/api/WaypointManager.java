@@ -54,4 +54,9 @@ public interface WaypointManager {
     default WaypointProfile getProfile(@NotNull UUID uuid) {
         return getProfiles().get(uuid);
     }
+
+    /**
+     * Called on plugin disable
+     */
+    void onDisable();
 }

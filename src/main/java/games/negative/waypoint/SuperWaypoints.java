@@ -38,6 +38,12 @@ public class SuperWaypoints extends BasePlugin {
         );
     }
 
+    @Override
+    public void onDisable() {
+        WaypointAPI api = WaypointAPI.getInstance();
+        api.getWaypointManager().onDisable();
+    }
+
     public static SuperWaypoints getInstance() {
         return instance;
     }
