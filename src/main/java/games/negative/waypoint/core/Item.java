@@ -56,6 +56,10 @@ public enum Item {
     ).build()),
 
     RETURN(ItemBuilder.newItemBuilder(Material.BOOK).setName("&c&lReturn").build()),
+
+    DELETE_CONFIRM(ItemBuilder.newItemBuilder(Material.LIME_STAINED_GLASS_PANE).setName("&a&lCONFIRM").build()),
+
+    DELETE_CANCEL(ItemBuilder.newItemBuilder(Material.RED_STAINED_GLASS_PANE).setName("&c&lCANCEL").build()),
     ;
 
     private final ItemStack item;

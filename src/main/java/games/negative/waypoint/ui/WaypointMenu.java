@@ -49,12 +49,21 @@ public class WaypointMenu extends GUI {
             ItemStack logo = ItemBuilder.newItemBuilder(icon).setName("&e" + key).build();
             addItemClickEvent(player -> logo, (player, event) -> {
                 if (event.isShiftClick()) {
-                    // Open Editor Menu
-                    new WaypointEditorMenu(manager, waypoint).open(player);
+                    // Open Delete Confirm Menu
+                    new WaypointDeleteMenu(profile, waypoint).open(player);
                     return;
                 }
 
-                player.sendMessage("click waypoint");
+                if (event.isRightClick()) {
+                    // Open Editor Menu
+                    new WaypointEditorMenu(manager, waypoint).open(player);
+                }
+
+                if (event.isLeftClick()) {
+                    // Select Waypoint
+                    manager.addActiveWaypoint(player.getUniqueId(), waypoint);
+                    handler.handleActivation(player, waypoint);
+                }
             });
 
         });
