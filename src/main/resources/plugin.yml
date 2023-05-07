@@ -2,4 +2,6 @@ name: SuperWaypoints
 version: '1.0.0-SNAPSHOT'
 main: games.negative.waypoint.SuperWaypoints
 
+softdepend: [ "HolographicDisplays" ]
+
 api-version: 1.19

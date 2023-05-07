@@ -37,4 +37,9 @@ public abstract class WaypointDisplayHandler implements Keyd<SharedKey> {
     public @NotNull SharedKey getKey() {
         return key;
     }
+
+    @Override
+    public void setKey(@NotNull SharedKey sharedKey) {
+        throw new UnsupportedOperationException("Cannot change the key of a waypoint display handler");
+    }
 }

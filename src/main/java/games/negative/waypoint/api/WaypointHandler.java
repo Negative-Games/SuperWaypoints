@@ -56,7 +56,7 @@ public interface WaypointHandler {
      * Get the main handler used on the server currently.
      * @return The main handler
      */
-    @NotNull
+    @Nullable
     WaypointDisplayHandler getMainHandler();
 
     /**

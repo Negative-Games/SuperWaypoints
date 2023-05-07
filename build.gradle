@@ -16,6 +16,8 @@ repositories {
 
     // Negative Games Repository
     maven { url 'https://repo.negative.games/repository/maven-public/' }
+
+    maven { url 'https://repo.codemc.io/repository/maven-public/' }
 }
 
 dependencies {
@@ -28,6 +30,7 @@ dependencies {
 
     // Apis
     compileOnly ("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly("me.filoghost.holographicdisplays:holograms-api:3.0.0")
 
     // Framework / Backend
     implementation ("games.negative.framework:minecraft-framework:3.2.5")
