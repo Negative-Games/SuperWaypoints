@@ -1,44 +1,54 @@
 package games.negative.waypoint.api.model;
 
+import com.google.common.collect.Lists;
 import games.negative.framework.key.Keyd;
+import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Represents a player's Waypoint Profile.
- * This class will contain all Waypoint appropriate data
- * for an individual player.
- */
-public interface WaypointProfile extends Keyd<UUID> {
+@Data
+public class WaypointProfile implements Keyd<UUID> {
 
-    /**
-     * Add a new Waypoint to the profile.
-     * @param waypoint The waypoint to add.
-     */
-    void addWaypoint(@NotNull Waypoint waypoint);
+    private final UUID key;
+    private final List<Waypoint> waypoints;
 
-    /**
-     * Remove a Waypoint from the profile.
-     * @param waypoint The waypoint to remove.
-     */
-    void removeWaypoint(@NotNull Waypoint waypoint);
+    public WaypointProfile(@NotNull UUID key) {
+        this(key, Lists.newArrayList());
+    }
 
-    /**
-     * Get a Waypoint from the profile.
-     * @param key The key of the waypoint.
-     * @return The waypoint, or null if it doesn't exist.
-     */
+    public WaypointProfile(@NotNull UUID key, @NotNull List<Waypoint> waypoints) {
+        this.key = key;
+        this.waypoints = waypoints;
+    }
+
+    public void addWaypoint(@NotNull Waypoint waypoint) {
+        waypoints.add(waypoint);
+    }
+
+    public void removeWaypoint(@NotNull Waypoint waypoint) {
+        waypoints.remove(waypoint);
+    }
+
     @Nullable
-    Waypoint getWaypoint(@NotNull String key);
+    public Waypoint getWaypoint(@NotNull String name) {
+        return waypoints.stream().filter(waypoint -> waypoint.getKey().equals(name)).findFirst().orElse(null);
+    }
 
-    /**
-     * Get all Waypoints from the profile.
-     * @return The waypoints.
-     */
     @NotNull
-    List<Waypoint> getWaypoints();
+    public List<Waypoint> getWaypoints() {
+        return waypoints;
+    }
 
+    @Override
+    public @NotNull UUID getKey() {
+        return key;
+    }
+
+    @Override
+    public void setKey(@NotNull UUID uuid) {
+        throw new UnsupportedOperationException("You cannot set the key of a WaypointProfile!");
+    }
 }

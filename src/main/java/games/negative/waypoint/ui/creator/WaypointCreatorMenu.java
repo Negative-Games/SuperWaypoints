@@ -8,6 +8,7 @@ import games.negative.waypoint.SuperWaypoints;
 import games.negative.waypoint.api.WaypointManager;
 import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.api.model.WaypointProfile;
+import games.negative.waypoint.api.model.builder.WaypointBuilder;
 import games.negative.waypoint.core.Item;
 import games.negative.waypoint.core.util.UtilLore;
 import org.bukkit.Location;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class WaypointCreatorMenu extends GUI {
-    public WaypointCreatorMenu(@NotNull WaypointManager manager, @NotNull Waypoint.Builder builder) {
+    public WaypointCreatorMenu(@NotNull WaypointManager manager, @NotNull WaypointBuilder builder) {
         super("Waypoint Creator", 5);
 
         List<Integer> fillerSlots = Lists.newArrayList(
@@ -31,7 +32,7 @@ public class WaypointCreatorMenu extends GUI {
         fillerSlots.forEach(index -> setItem(index, player -> filler));
 
         ItemStack setName = Item.SET_NAME.getItem().clone();
-        UtilLore.replaceLore(setName, "%name%", (builder.getName() == null ? "Not Set" : builder.getName()));
+        UtilLore.replaceLore(setName, "%name%", (builder.getKey() == null ? "Not Set" : builder.getKey()));
 
         setItemClickEvent(10, player -> setName, (player, event) -> {
             new AnvilGUI.Builder().title("Waypoint Creator - Name")
@@ -41,7 +42,7 @@ public class WaypointCreatorMenu extends GUI {
                         if (text == null || !text.matches("^[a-zA-Z0-9_]{3,16}$"))
                             return AnvilGUI.Response.text("Invalid name");
 
-                        builder.name(text);
+                        builder.key(text);
                         new DelayedOpenTask(manager, builder, player).runTaskLater(SuperWaypoints.getInstance(), 2);
                         return AnvilGUI.Response.close();
                     }).open(player);
@@ -70,7 +71,7 @@ public class WaypointCreatorMenu extends GUI {
         ItemStack confirm = Item.GREEN_CONFIRM.getItem();
         List<Integer> confirmSlots = Lists.newArrayList(27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44);
         confirmSlots.forEach(index -> setItemClickEvent(index, player -> confirm, (player, event) -> {
-            String name = builder.getName();
+            String name = builder.getKey();
             if (name == null) {
                 player.sendMessage("Name is null");
                 return;
@@ -104,10 +105,10 @@ public class WaypointCreatorMenu extends GUI {
     private static class DelayedOpenTask extends BukkitRunnable {
 
         private final WaypointManager manager;
-        private final Waypoint.Builder builder;
+        private final WaypointBuilder builder;
         private final Player player;
 
-        private DelayedOpenTask(WaypointManager manager, Waypoint.Builder builder, Player player) {
+        private DelayedOpenTask(WaypointManager manager, WaypointBuilder builder, Player player) {
             this.manager = manager;
             this.builder = builder;
             this.player = player;

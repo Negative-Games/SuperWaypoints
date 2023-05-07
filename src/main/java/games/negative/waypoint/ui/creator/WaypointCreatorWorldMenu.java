@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import games.negative.framework.base.itembuilder.ItemBuilder;
 import games.negative.framework.gui.GUI;
 import games.negative.waypoint.api.WaypointManager;
-import games.negative.waypoint.api.model.Waypoint;
+import games.negative.waypoint.api.model.builder.WaypointBuilder;
 import games.negative.waypoint.core.Item;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class WaypointCreatorWorldMenu extends GUI {
-    public WaypointCreatorWorldMenu(@NotNull WaypointManager manager, @NotNull Waypoint.Builder builder, int page) {
+    public WaypointCreatorWorldMenu(@NotNull WaypointManager manager, @NotNull WaypointBuilder builder, int page) {
         super("Waypoint Creator - Location", 5);
 
         List<Integer> fillerSlots = Lists.newArrayList(

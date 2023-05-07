@@ -8,7 +8,6 @@ import games.negative.waypoint.api.WaypointManager;
 import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.api.model.WaypointProfile;
 import games.negative.waypoint.core.Log;
-import games.negative.waypoint.core.structure.WaypointProfileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,7 +61,7 @@ public class WaypointManagerProvider implements WaypointManager {
             try {
                 profile.createNewFile();
 
-                WaypointProfile waypointProfile = new WaypointProfileImpl(uuid);
+                WaypointProfile waypointProfile = new WaypointProfile(uuid);
                 this.profiles.remove(uuid);
                 this.profiles.put(uuid, waypointProfile);
 
@@ -88,7 +87,7 @@ public class WaypointManagerProvider implements WaypointManager {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         try(Reader reader = new FileReader(profile)) {
-            WaypointProfile waypointProfile = gson.fromJson(reader, WaypointProfileImpl.class);
+            WaypointProfile waypointProfile = gson.fromJson(reader, WaypointProfile.class);
             this.profiles.remove(uuid);
             this.profiles.put(uuid, waypointProfile);
 

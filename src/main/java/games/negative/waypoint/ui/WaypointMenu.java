@@ -7,6 +7,7 @@ import games.negative.waypoint.api.WaypointHandler;
 import games.negative.waypoint.api.WaypointManager;
 import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.api.model.WaypointProfile;
+import games.negative.waypoint.api.model.builder.WaypointBuilder;
 import games.negative.waypoint.core.Item;
 import games.negative.waypoint.ui.creator.WaypointCreatorMenu;
 import org.bukkit.Location;
@@ -29,7 +30,7 @@ public class WaypointMenu extends GUI {
 
         ItemStack addWaypoint = Item.ADD_WAYPOINT.getItem();
         setItemClickEvent(49, player -> addWaypoint, (player, event) -> {
-            Waypoint.Builder builder = new Waypoint.Builder();
+            WaypointBuilder builder = new WaypointBuilder();
             Location location = player.getLocation();
             builder.location(location);
 
@@ -39,7 +40,9 @@ public class WaypointMenu extends GUI {
         List<Waypoint> waypoints = profile.getWaypoints();
         int limit = Math.max((6 * 9) - fillerSlots.size(), 0);
         waypoints.stream().skip((long) (page - 1) * limit).limit(limit).forEach(waypoint -> {
-            Material icon = waypoint.getIcon();
+            Material waypointIcon = waypoint.getIcon();
+            final Material icon = (waypointIcon == null ? Material.GRASS_BLOCK : waypointIcon);
+
             String key = waypoint.getKey();
 
             ItemStack logo = ItemBuilder.newItemBuilder(icon).setName("&e" + key).build();

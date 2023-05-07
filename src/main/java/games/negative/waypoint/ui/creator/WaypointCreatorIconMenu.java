@@ -3,7 +3,7 @@ package games.negative.waypoint.ui.creator;
 import com.google.common.collect.Lists;
 import games.negative.framework.gui.GUI;
 import games.negative.waypoint.api.WaypointManager;
-import games.negative.waypoint.api.model.Waypoint;
+import games.negative.waypoint.api.model.builder.WaypointBuilder;
 import games.negative.waypoint.core.Item;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WaypointCreatorIconMenu extends GUI {
-    public WaypointCreatorIconMenu(WaypointManager manager, Waypoint.Builder builder, int page) {
+    public WaypointCreatorIconMenu(WaypointManager manager, WaypointBuilder builder, int page) {
         super("Waypoint Creator - Icon", 6);
 
         List<Integer> fillerSlots = Lists.newArrayList(0, 1, 2,3, 4, 5, 6, 7, 8, 9,

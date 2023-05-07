@@ -6,7 +6,7 @@ import games.negative.framework.gui.GUI;
 import games.negative.framework.util.Utils;
 import games.negative.waypoint.SuperWaypoints;
 import games.negative.waypoint.api.WaypointManager;
-import games.negative.waypoint.api.model.Waypoint;
+import games.negative.waypoint.api.model.builder.WaypointBuilder;
 import games.negative.waypoint.core.Item;
 import games.negative.waypoint.core.util.UtilLore;
 import org.bukkit.Location;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class WaypointCreatorLocationMenu extends GUI {
-    public WaypointCreatorLocationMenu(@NotNull WaypointManager manager, @NotNull Waypoint.Builder builder) {
+    public WaypointCreatorLocationMenu(@NotNull WaypointManager manager, @NotNull WaypointBuilder builder) {
         super("Waypoint Creator - Location", 5);
 
         List<Integer> fillerSlots = Lists.newArrayList(
@@ -110,11 +110,11 @@ public class WaypointCreatorLocationMenu extends GUI {
 
     private static class DelayedOpenTask extends BukkitRunnable {
 
-        private final Waypoint.Builder builder;
+        private final WaypointBuilder builder;
         private final WaypointManager manager;
         private final Player player;
 
-        private DelayedOpenTask(Waypoint.Builder builder, WaypointManager manager, Player player) {
+        private DelayedOpenTask(WaypointBuilder builder, WaypointManager manager, Player player) {
             this.builder = builder;
             this.manager = manager;
             this.player = player;
