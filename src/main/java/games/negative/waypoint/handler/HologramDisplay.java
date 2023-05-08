@@ -54,7 +54,8 @@ public class HologramDisplay extends WaypointDisplayHandler {
 
     @Override
     public void activate(@NotNull Player player, @NotNull Waypoint waypoint) {
-        this.tracking.put(player.getUniqueId(), waypoint);
+        UUID uuid = player.getUniqueId();
+        this.tracking.put(uuid, waypoint);
 
         Hologram hologram = HolographicDisplaysAPI.get(plugin).createHologram(player.getLocation());
         VisibilitySettings visibility = hologram.getVisibilitySettings();
@@ -63,6 +64,8 @@ public class HologramDisplay extends WaypointDisplayHandler {
 
         HologramLines lines = hologram.getLines();
         lines.appendText("%distance%m");
+
+        this.holograms.put(uuid, hologram);
     }
 
     @Override

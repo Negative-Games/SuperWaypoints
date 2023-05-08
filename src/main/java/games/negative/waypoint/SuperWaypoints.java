@@ -4,6 +4,7 @@ import games.negative.framework.BasePlugin;
 import games.negative.waypoint.api.WaypointAPI;
 import games.negative.waypoint.api.WaypointHandler;
 import games.negative.waypoint.api.WaypointManager;
+import games.negative.waypoint.api.model.display.WaypointDisplayHandler;
 import games.negative.waypoint.command.main.CommandWaypoint;
 import games.negative.waypoint.core.Item;
 import games.negative.waypoint.core.Locale;
@@ -47,6 +48,10 @@ public class SuperWaypoints extends BasePlugin {
     public void onDisable() {
         WaypointAPI api = WaypointAPI.getInstance();
         api.getWaypointManager().onDisable();
+
+        WaypointDisplayHandler main = api.getWaypointHandler().getMainHandler();
+        if (main != null) main.onDisable();
+
     }
 
     public static SuperWaypoints getInstance() {
