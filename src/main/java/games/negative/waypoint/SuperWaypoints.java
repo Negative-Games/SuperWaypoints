@@ -9,6 +9,7 @@ import games.negative.waypoint.core.Item;
 import games.negative.waypoint.core.Locale;
 import games.negative.waypoint.core.Log;
 import games.negative.waypoint.core.provider.WaypointAPIProvider;
+import games.negative.waypoint.handler.HologramDisplay;
 import games.negative.waypoint.listener.PlayerProfileListener;
 
 public class SuperWaypoints extends BasePlugin {
@@ -28,6 +29,10 @@ public class SuperWaypoints extends BasePlugin {
         WaypointAPI api = WaypointAPI.getInstance();
         WaypointManager waypointManager = api.getWaypointManager();
         WaypointHandler waypointHandler = api.getWaypointHandler();
+
+        HologramDisplay hologramDisplay = new HologramDisplay(this);
+        waypointHandler.setMainHandler(hologramDisplay);
+        waypointHandler.addHandler(hologramDisplay);
 
         registerListeners(
                 new PlayerProfileListener(waypointManager)

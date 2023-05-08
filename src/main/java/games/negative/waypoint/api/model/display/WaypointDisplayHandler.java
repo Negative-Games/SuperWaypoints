@@ -33,6 +33,11 @@ public abstract class WaypointDisplayHandler implements Keyd<SharedKey> {
      */
     public abstract void deactivate(@NotNull Player player, @NotNull Waypoint waypoint);
 
+    /**
+     * Invoked when the plugin is disabled.
+     */
+    public abstract void onDisable();
+
     @Override
     public @NotNull SharedKey getKey() {
         return key;
