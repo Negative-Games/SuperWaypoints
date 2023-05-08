@@ -34,6 +34,7 @@ public class HologramDisplay extends WaypointDisplayHandler {
 
     private static final double HOLOGRAM_HEIGHT = 2.25;
     private static final int MAX_HOLOGRAM_TELEPORT_DISTANCE = 5;
+    private static final int MAX_HOLOGRAM_TELEPORT_DISTANCE_WHILE_FLYING = 15;
     private static final long UPDATE_INTERVAL = 2L;
     private static final int DESTINATION_DISTANCE = 5;
 
@@ -135,13 +136,14 @@ public class HologramDisplay extends WaypointDisplayHandler {
                 Vector direction = destination.toVector().subtract(location.toVector());
 
                 // Limit the magnitude of the direction vector to the maximum hologram teleport distance
-                if (direction.length() > MAX_HOLOGRAM_TELEPORT_DISTANCE) {
-                    direction.normalize().multiply(MAX_HOLOGRAM_TELEPORT_DISTANCE);
+                int max = (player.isGliding() ? MAX_HOLOGRAM_TELEPORT_DISTANCE_WHILE_FLYING : MAX_HOLOGRAM_TELEPORT_DISTANCE);
+                if (direction.length() > max) {
+                    direction.normalize().multiply(max);
                 }
 
                 // Add the direction vector to the hologram's current location to teleport it closer to the destination
                 Location updated = hologram.getPosition().toLocation().add(direction);
-                    if (Math.abs(updated.distance(location)) > MAX_HOLOGRAM_TELEPORT_DISTANCE) {
+                    if (Math.abs(updated.distance(location)) > max) {
                     // Hologram is beyond the distance limit, so we will teleport it closer to the player
                     updated = location.add(direction);
                 }
