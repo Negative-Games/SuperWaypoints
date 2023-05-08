@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import games.negative.framework.util.Utils;
 import games.negative.waypoint.SuperWaypoints;
+import games.negative.waypoint.api.WaypointAPI;
+import games.negative.waypoint.api.WaypointManager;
 import games.negative.waypoint.api.model.Waypoint;
 import games.negative.waypoint.api.model.display.WaypointDisplayHandler;
 import games.negative.waypoint.api.model.key.SharedKey;
@@ -12,6 +14,8 @@ import me.filoghost.holographicdisplays.api.HolographicDisplaysAPI;
 import me.filoghost.holographicdisplays.api.hologram.Hologram;
 import me.filoghost.holographicdisplays.api.hologram.HologramLines;
 import me.filoghost.holographicdisplays.api.hologram.VisibilitySettings;
+import me.filoghost.holographicdisplays.api.hologram.line.HologramLine;
+import me.filoghost.holographicdisplays.api.hologram.line.TextHologramLine;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -28,8 +32,10 @@ import java.util.UUID;
 
 public class HologramDisplay extends WaypointDisplayHandler {
 
+    private static final double HOLOGRAM_HEIGHT = 2.25;
     private static final int MAX_HOLOGRAM_TELEPORT_DISTANCE = 5;
-    private static final long UPDATE_INTERVAL = 5L;
+    private static final long UPDATE_INTERVAL = 2L;
+    private static final int DESTINATION_DISTANCE = 5;
 
     private final SuperWaypoints plugin;
     private final Map<UUID, Waypoint> tracking;
@@ -104,27 +110,43 @@ public class HologramDisplay extends WaypointDisplayHandler {
                 }
 
                 Location destination = waypoint.getLocation();
-                if (destination == null)
+                if (destination == null) {
+                    deactivate(player, waypoint);
                     continue;
+                }
 
                 Location location = player.getLocation();
 
                 double distance = Math.abs(destination.distance(location));
+                if (distance <= DESTINATION_DISTANCE) {
+                    // Player is at the destination, so we will remove the hologram and stop tracking
+                    WaypointManager manager = WaypointAPI.getInstance().getWaypointManager();
+                    manager.removeActiveWaypoint(uuid);
+                    deactivate(player, waypoint);
+                    return;
+                }
 
                 HologramLines lines = hologram.getLines();
-                lines.insertText(0, Utils.decimalFormat(distance) + "m");
+                HologramLine line = lines.get(0);
+                if (line instanceof TextHologramLine textLine)
+                    textLine.setText(Utils.decimalFormat(distance) + "m");
 
                 // Calculate the direction vector from the hologram to the destination
                 Vector direction = destination.toVector().subtract(location.toVector());
 
                 // Limit the magnitude of the direction vector to the maximum hologram teleport distance
-                double maxDistance = MAX_HOLOGRAM_TELEPORT_DISTANCE;
-                if (direction.length() > maxDistance) {
-                    direction.normalize().multiply(maxDistance);
+                if (direction.length() > MAX_HOLOGRAM_TELEPORT_DISTANCE) {
+                    direction.normalize().multiply(MAX_HOLOGRAM_TELEPORT_DISTANCE);
                 }
 
                 // Add the direction vector to the hologram's current location to teleport it closer to the destination
                 Location updated = hologram.getPosition().toLocation().add(direction);
+                    if (Math.abs(updated.distance(location)) > MAX_HOLOGRAM_TELEPORT_DISTANCE) {
+                    // Hologram is beyond the distance limit, so we will teleport it closer to the player
+                    updated = location.add(direction);
+                }
+                updated.setY(location.getY() + HOLOGRAM_HEIGHT);
+
                 hologram.setPosition(updated);
             }
 

@@ -66,6 +66,17 @@ public class WaypointMenu extends GUI {
 
                 if (event.isLeftClick()) {
                     // Select Waypoint
+                    Waypoint active = manager.getActiveWaypoint(player.getUniqueId());
+                    if (active != null) {
+                        boolean same = active.equals(waypoint);
+
+                        manager.removeActiveWaypoint(player.getUniqueId());
+                        handler.handleDeactivation(player, waypoint);
+
+                        // If they clicked the same waypoint, means they just
+                        // wanted to deactivate it. So we don't need to activate a new one.
+                        if (same) return;
+                    }
                     manager.addActiveWaypoint(player.getUniqueId(), waypoint);
                     handler.handleActivation(player, waypoint);
                 }

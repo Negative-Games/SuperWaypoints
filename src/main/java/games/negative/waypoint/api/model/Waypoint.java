@@ -1,5 +1,6 @@
 package games.negative.waypoint.api.model;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.gson.annotations.SerializedName;
 import games.negative.framework.key.Keyd;
@@ -71,5 +72,17 @@ public class Waypoint implements Keyd<String> {
     @Override
     public void setKey(@NotNull String key) {
         this.key = key;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Waypoint waypoint)) return false;
+        return creationTime == waypoint.creationTime && Double.compare(waypoint.x, x) == 0 && Double.compare(waypoint.y, y) == 0 && Double.compare(waypoint.z, z) == 0 && Objects.equal(key, waypoint.key) && Objects.equal(world, waypoint.world) && icon == waypoint.icon;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(key, creationTime, world, x, y, z, icon);
     }
 }
