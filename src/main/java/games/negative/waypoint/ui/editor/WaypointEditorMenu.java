@@ -39,7 +39,7 @@ public class WaypointEditorMenu extends GUI {
                     .text("Enter Name")
                     .onClose(user -> new DelayedOpenTask(manager, waypoint, player).runTaskLater(SuperWaypoints.getInstance(), 2))
                     .onComplete((user, text) -> {
-                        if (text == null || !text.matches("^[a-zA-Z0-9_]{3,16}$"))
+                        if (text == null || !text.matches("^[a-zA-Z0-9_ ]{3,16}$"))
                             return AnvilGUI.Response.text("Invalid name");
 
                         waypoint.setKey(text);
