@@ -1,20 +1,16 @@
 package games.negative.waypoint.command.main;
 
-import games.negative.framework.command.Command;
-import games.negative.framework.command.annotation.CommandInfo;
+import games.negative.framework.commands.Command;
+import games.negative.framework.commands.Context;
 import games.negative.waypoint.api.WaypointHandler;
 import games.negative.waypoint.api.WaypointManager;
 import games.negative.waypoint.api.model.WaypointProfile;
 import games.negative.waypoint.core.Log;
 import games.negative.waypoint.ui.WaypointMenu;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
-@CommandInfo(
-        name = "waypoint",
-        playerOnly = true
-)
-public class CommandWaypoint extends Command {
+public class CommandWaypoint implements Command {
 
     private final WaypointManager manager;
     private final WaypointHandler handler;
@@ -24,10 +20,10 @@ public class CommandWaypoint extends Command {
         this.handler = handler;
     }
 
-
     @Override
-    public void onCommand(CommandSender sender, String[] args) {
-        Player player = (Player) sender;
+    public void execute(@NotNull Context context) {
+        Player player = context.getPlayer();
+        assert player != null;
 
         WaypointProfile profile = manager.getProfile(player.getUniqueId());
         if (profile == null) {

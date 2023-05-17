@@ -1,6 +1,7 @@
 package games.negative.waypoint;
 
 import games.negative.framework.BasePlugin;
+import games.negative.framework.commands.CommandBuilder;
 import games.negative.waypoint.api.WaypointAPI;
 import games.negative.waypoint.api.WaypointHandler;
 import games.negative.waypoint.api.WaypointManager;
@@ -39,9 +40,14 @@ public class SuperWaypoints extends BasePlugin {
                 new PlayerProfileListener(waypointManager)
         );
 
-        registerCommands(
-                new CommandWaypoint(waypointManager, waypointHandler)
+        registerCommand(
+                new CommandBuilder(new CommandWaypoint(waypointManager, waypointHandler))
+                        .name("waypoint")
+                        .description("View, create, edit and remove waypoints using this command.")
+                        .playerOnly()
         );
+
+
     }
 
     @Override
