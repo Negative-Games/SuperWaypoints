@@ -29,7 +29,7 @@ dependencies {
     annotationProcessor("org.jetbrains:annotations:24.0.1")
 
     // Apis
-    compileOnly ("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
+    compileOnly ("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
     compileOnly 'me.filoghost.holographicdisplays:holographicdisplays-api:3.0.2'
 
     // Framework / Backend
