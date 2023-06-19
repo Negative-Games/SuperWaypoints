@@ -33,7 +33,7 @@ dependencies {
     compileOnly 'me.filoghost.holographicdisplays:holographicdisplays-api:3.0.2'
 
     // Framework / Backend
-    implementation ("games.negative.framework:minecraft-framework:3.3.6")
+    implementation ("games.negative.framework:minecraft-framework:3.4.9")
 }
 
 def targetJavaVersion = 17
